@@ -23,6 +23,7 @@ scissors.addEventListener('click', () =>  {
     return;
 });
 
+
 let playerscore = document.querySelector("#playerscore");
 let compscore = document.querySelector("#compscore");
 
@@ -56,26 +57,31 @@ function playRound () {
 
     if (playerSelection === "rock" && computerSelection === "scissors") 
     {
+        document.getElementById("roundResult").textContent = "You win! You chose paper and the computer chose scissors!";
         playerscore++;
         updateScore();
     }
     else if (playerSelection === "rock" && computerSelection === "paper") 
     {
+        document.getElementById("roundResult").textContent = "You lose! You chose rock and the computer chose paper!";
         compscore++;
         updateScore(); 
     }
     else if (playerSelection === "paper" && computerSelection === "rock") 
     {
+        document.getElementById("roundResult").textContent = "You win! You chose paper and the computer chose rock!";
         playerscore++;
         updateScore();
     }
     else if (playerSelection === "paper" && computerSelection === "scissors") 
     {
+        document.getElementById("roundResult").textContent = "You lose! You chose paper and the computer chose scissors!";
         compscore++;
         updateScore();
     }
     else if (playerSelection === "scissors" && computerSelection === "rock") 
     {
+        document.getElementById("roundResult").textContent = "You lose! You chose scissors and the computer chose rock!";
         compscore++;
         updateScore();
     }
@@ -86,7 +92,7 @@ function playRound () {
     } 
     else if (playerSelection === computerSelection) 
     {
-        alert("Tie! Make another selection");
+        document.getElementById("roundResult").textContent = "Tie! Make another selection";
         updateScore();
         return;
     }
