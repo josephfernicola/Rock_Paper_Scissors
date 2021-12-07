@@ -57,7 +57,7 @@ function playRound () {
 
     if (playerSelection === "rock" && computerSelection === "scissors") 
     {
-        document.getElementById("roundResult").textContent = "You win! You chose paper and the computer chose scissors!";
+        document.getElementById("roundResult").textContent = "You win! You chose rock and the computer chose scissors!";
         playerscore++;
         updateScore();
     }
@@ -87,6 +87,7 @@ function playRound () {
     }
     else if (playerSelection === "scissors" && computerSelection === "paper") 
     {
+        document.getElementById("roundResult").textContent = "You win! You chose scissors and the computer chose paper!";
         playerscore++;
         updateScore();
     } 
