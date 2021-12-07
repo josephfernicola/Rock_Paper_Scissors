@@ -4,84 +4,95 @@ function computerPlay() {
     return choices[random];
 }
 
-let score = [];
+const rock = document.querySelector('#rock')
+rock.addEventListener('click', () =>  {
+    playerSelection = "rock";
+    playRound();
+    return;
+});
+const paper = document.querySelector('#paper')
+paper.addEventListener('click', () =>  {
+    playerSelection = "paper";
+    playRound();
+    return;
+});
+const scissors = document.querySelector('#scissors')
+scissors.addEventListener('click', () =>  {
+    playerSelection = "scissors";
+    playRound();
+    return;
+});
+
+let playerscore = document.querySelector("#playerscore");
+let compscore = document.querySelector("#compscore");
+
+playerscore = 0;
+compscore = 0;
+
+function updateScore() {
+    document.getElementById("playerscore").textContent = "You: " + playerscore;
+    document.getElementById("compscore").textContent = "Computer: " + compscore;
+    if (playerscore == 5) {
+        alert("You have beat the computer! Congratulations! Your score: 5. Computer Score: " +compscore);
+        gameOver();
+        return;
+    }
+    else if (compscore == 5) {
+        alert("The computer has beat you. Better luck next time. Computer Score: 5. Your score: "+ playerscore);
+        gameOver();
+        return;
+    }
+}   
+
+function gameOver () {
+    playerscore = 0;
+    compscore = 0;
+    document.getElementById("playerscore").textContent = "You: " + playerscore;
+    document.getElementById("compscore").textContent = "Computer: " + compscore;
+}
 
 function playRound () {
-    let playerSelection = prompt("Rock, Paper, or Scissors?");
-    playerSelection = playerSelection.toLowerCase();
     let computerSelection = computerPlay();
 
     if (playerSelection === "rock" && computerSelection === "scissors") 
     {
-        alert("You win! Rock beats Scissors!");
-        return score.push(1);
+        playerscore++;
+        updateScore();
     }
     else if (playerSelection === "rock" && computerSelection === "paper") 
     {
-        alert("You Lose! Paper beats Rock!");
-        return score.push(0);  
+        compscore++;
+        updateScore(); 
     }
     else if (playerSelection === "paper" && computerSelection === "rock") 
     {
-        alert("You win! Paper beats Rock!");
-        return score.push(1);
+        playerscore++;
+        updateScore();
     }
     else if (playerSelection === "paper" && computerSelection === "scissors") 
     {
-        alert("You lose! Scissors beats Paper!");
-        return score.push(0);
+        compscore++;
+        updateScore();
     }
     else if (playerSelection === "scissors" && computerSelection === "rock") 
     {
-        alert("You Lose! Rock beats Scissors!");
-        return score.push(0);
+        compscore++;
+        updateScore();
     }
     else if (playerSelection === "scissors" && computerSelection === "paper") 
     {
-        alert("You win! Scissors beats Paper!");
-        return score.push(1);
+        playerscore++;
+        updateScore();
     } 
     else if (playerSelection === computerSelection) 
     {
         alert("Tie! Make another selection");
-        return "tie";
+        updateScore();
+        return;
     }
     else {
         alert("Invalid Selection. Please try again.");
-        return "invalid";
+        updateScore();
+        return;
     } 
-};
-
-function getOccurence(score, value) {
-    let count = 0;
-    score.forEach((v) => (v === value && count++));
-    return count;
-};
-
-function game() {
-    // While occurence of 1 in score < 3 and occurence of 0 in score < 3, Play a round then reset computer choice//
-    while (getOccurence(score, 1) < 3 && getOccurence(score, 0) < 3) { 
-       playRound();
-       computerPlay();
-    }
-        // if 1 in score >=3, declare player the winner
-      if (getOccurence(score, 1) == 3) {
-          alert("You have beat the computer! Congratulations!");
-          return "You have beat the computer! Congratulations!";
-        }
-        //else if 0 in score >=3, declare the computer the winner
-      else if (getOccurence(score, 0) == 3) {
-          alert("The computer has beat you. Better luck next time.");
-          return "The computer has beat you. Better luck next time.";
-        }
-        //else, declare a tie
-      else {
-          alert("Tie!");
-          return "Tie!";
-        }
-    
-};
-console.log(game());
-console.log(getOccurence(score, 1));
-console.log(getOccurence(score, 0));
-
+};    
